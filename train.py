@@ -21,7 +21,7 @@ def main(_):
   print(config.dataset.num_classes)
   print(config.dataset.num_seg_classes)
 
-  inputs = tf.random.normal([10, 320, 320, 3])
+  inputs = tf.random.normal([1, 320, 320, 3])
   upsnet(inputs)
 
 if __name__ == '__main__':

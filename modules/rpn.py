@@ -5,7 +5,7 @@ from __future__ import print_function
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
 
-def rpn(net, num_anchors=15, with_norm='none', weight_decay=None):
+def rpn(net, num_anchors=15, input_dim=256, with_norm='none', weight_decay=None):
 
   input_dim = net.get_shape().as_list()[-1]
 

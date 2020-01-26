@@ -68,11 +68,11 @@ def fpn(backbone_feats,
       if normalize:
         fpn_p2_1x1 = normalize(fpn_p2_1x1)
 
-    if config.network.fpn_with_gap:
-      fpn_gap = tf.reshape(
-          slim.fully_connected(
-              tf.squeeze(slim.avg_pool2d(backbone_feats[3], [1, 1])),
-              feature_dim), [-1, feature_dim, 1, 1])
+    # with global average pooling 
+    if config.network.fpn_with_gap: 
+      fpn_gap = slim.fully_connected(
+              tf.reduce_mean(backbone_feats['res5'], axis=[1, 2], keep_dims=True),
+              feature_dim)
       fpn_p5_1x1 = fpn_p5_1x1 + fpn_gap
 
     fpn_p5_upsample = fpn_upsample(fpn_p5_1x1)
